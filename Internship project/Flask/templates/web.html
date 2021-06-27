@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title>
+            Predicting from values
+        </title>
+        <link rel="stylesheet" href="../static/css/style2.css"></link>
+    </head>
+    <body>
+        <div class="head">
+            <h1>Body Fitness Prediction</h1>
+            <h3><i>A Machine Learning Web App, Built with Flask</i></h3>
+        </div><br/><br/>
+        <center>
+            <form action="http://localhost:5000/predict" method="POST" onsubmit="return validate()">
+                <table cellpadding=10>
+                <tr><td><select name="sad" id="s">
+                    <option value=-1 selected>Is your mood is sad</option>
+                    <option value=100>Yes</option>
+                    <option value=0>No</option>
+                </select></td></tr>
+                <tr><td><select name="neutral" id="n">
+                    <option value=-1 selected>Is your mood is neutral</option>
+                    <option value=200>Yes</option>
+                    <option value=0>No</option>
+                </select></td></tr>
+                <tr><td><select name="happy" id="h">
+                    <option value=-1 selected>Is your mood is happy</option>
+                    <option value=300>Yes</option>
+                    <option value=0>No</option>
+                </select></td></tr>
+                <tr><td><input type="number" name="step_counts" placeholder="Enter the step counts" required /></td></tr>
+                <tr><td><input type="number" name="calories_burned" placeholder="Enter the calories_burned" required /></td></tr>
+                <tr><td><input type="number" name="hrs_of_sleep" placeholder="Enter the hours of sleep" required /></td></tr>
+                <tr><td><input type="number" name="weight_kg" placeholder="Enter your weight in kg" required /></td></tr>
+                <tr><td> <input class="btn" type="submit" value="Predict" /></td></tr>
+                </table>
+            </form><br/><br/><br/>
+            <h1>{{prediction_text}}</h1>
+        </center>
+
+        <script>
+            function validate() {
+                var s,n,h;
+                s=parseInt(document.getElementById("s").value);
+                n=parseInt(document.getElementById("n").value);
+                h=parseInt(document.getElementById("h").value);
+                if(s==-1) {
+                    alert("Please select whether your mood is sad or not")
+                    return false;
+                }
+                if(n==-1) {
+                    alert("Please select whether your mood is neutral or not")
+                    return false;
+                }
+                if(h==-1) {
+                    alert("Please select whether your mood is happy or not")
+                    return false;
+                }
+                if((s>0 && n>0) || (s>0 && h>0) || (n>0 && h>0)) {
+                    alert("Please select the mood properly.\nYou cannot have more than one mood at a time");
+                    return false;
+                }
+            }
+        </script>
+
+    </body>
+</html>
